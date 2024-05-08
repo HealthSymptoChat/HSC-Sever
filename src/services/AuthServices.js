@@ -11,7 +11,7 @@ class AuthService {
 
       if (!userData.email || !userData.password) {
         throw new Error(
-          "All fields (email, password, date of birth) are required."
+          "All fields (email, password) are required."
         );
       }
 
