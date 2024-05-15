@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import userController from "../controllers/UserController.js";
+import {AuthMiddleware} from '../middleware/AuthMiddleware.js';
 
 // GET METHODS
 router.get("/getListUserByName/:username", userController.getListUserByName);

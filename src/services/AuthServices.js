@@ -42,11 +42,12 @@ class AuthService {
   async login(loginData) {
     try {
       let user;
-      if (validator.isEmail(loginData.email)) {
-        user = await User.findOne({ email: loginData.email });
-      } else {
-        throw new Error("Invalid email address. Please provide a valid email.");
-      }
+      // if (validator.isEmail(loginData.email)) {
+      //   user = await User.findOne({ email: loginData.email });
+      // } else {
+      //   throw new Error("Invalid email address. Please provide a valid email.");
+      // }
+      user = await User.findOne({ username: loginData.username });
 
       if (!user) {
         throw new Error("User not found. Please check your credentials.");
