@@ -5,15 +5,15 @@ import userController from "../controllers/UserController.js";
 import {AuthMiddleware} from '../middleware/AuthMiddleware.js';
 
 // GET METHODS
-router.get("/getListUserByName/:username", userController.getListUserByName);
+router.get("/getListUserByName/:username", AuthMiddleware, userController.getListUserByName);
 
-router.get("/getListUser", userController.getListUser);
+router.get("/getListUser", AuthMiddleware, userController.getListUser);
 
-router.get("/getListUserByEmail/:email", userController.getListUserByEmail);
+router.get("/getListUserByEmail/:email", AuthMiddleware, userController.getListUserByEmail);
 
-router.get("/getUserById/:id", userController.getUserById);
+router.get("/getUserById/:id", AuthMiddleware,userController.getUserById);
 
 // POST METHODS
-router.post("/updateUser/:id", userController.updateUser);
+router.post("/updateUser/:id", AuthMiddleware, userController.updateUser);
 
 export default router;
