@@ -6,7 +6,11 @@ class UserController {
         try {
           const { id } = req.params;
           const user = await UserServices.getUserById(id);
-          res.status(200).json(user);
+          res.status(200).json({
+            status: 200,
+            mesage: "success",
+            data: user
+        });
         } catch (error) {
           res.status(500).json({ error: error.message });
           next();
@@ -18,7 +22,11 @@ class UserController {
           const { id } = req.params;
           const userUpdate = req.body;
           const user = await UserServices.updateUserById(id, userUpdate);
-          res.status(200).json(user);
+          res.status(200).json({
+            status: 200,
+            mesage: "success",
+            data: user
+        });
         } catch (error) {
           res.status(500).json({ error: error.message });
           next();
@@ -30,7 +38,11 @@ class UserController {
           const { username } = req.params;
     
           const userList = await UserServices.getListUserByName(username);
-          res.status(200).json(userList);
+          res.status(200).json({
+            status: 200,
+            mesage: "success",
+            data: userList
+        });
         } catch (error) {
           res.status(500).json({ error: error.message });
         }
@@ -41,7 +53,11 @@ class UserController {
           const { email } = req.params;
     
           const userList = await UserServices.getListUserByEmail(email);
-          res.status(200).json({ success: true, data: userList });
+          res.status(200).json({
+            status: 200,
+            mesage: "success",
+            data: userList
+        });
         } catch (error) {
           res.status(500).json({ error: error.message });
         }
@@ -50,7 +66,11 @@ class UserController {
       async getListUser(req, res) {
         try {
           const userList = await UserServices.getListUser();
-          return res.status(200).json(userList);
+          res.status(200).json({
+            status: 200,
+            mesage: "success",
+            data: userList
+        });
         } catch (error) {
           res.status(500).json({ error: error.message });
         }

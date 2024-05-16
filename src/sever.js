@@ -1,7 +1,7 @@
 import express from "express"
 import route from "./routers/index.js";
 import db from "./config/database/index.js";
-import dotenv from "dotenv";
+import dotenv from "dotenv";  
 const app = express()
 app.use(express.json());
 app.use(express.urlencoded({extended:false})); 
