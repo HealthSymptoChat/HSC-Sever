@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
-         type: {
-            type: String,
-            default: "Personal",
+         role_id: {
+            type: Number,
+            default: "",
           },
           email: {
             type: String,
@@ -32,7 +32,32 @@ const schema = new mongoose.Schema(
           refreshToken: {
             type: String,
             default: "",
-          }
+          },
+          address: {
+            type: String,
+            default: "",
+          },
+          avatar: {
+            type: String,
+            default: "",
+          },
+          status: {
+            type: String,
+            default: "active",
+          },
+          gender: {
+            type: String,
+            default: "",
+          },
+          height: {
+            type: Number,
+            default: "",
+          },
+          weight: {
+            type: Number,
+            default: "",
+          },
+
 
     }
 );

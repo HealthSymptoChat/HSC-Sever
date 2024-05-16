@@ -48,7 +48,7 @@ class AuthService {
       //   throw new Error("Invalid email address. Please provide a valid email.");
       // }
       user = await User.findOne({ username: loginData.username });
-
+      
       if (!user) {
         throw new Error("User not found. Please check your credentials.");
       }
@@ -118,6 +118,33 @@ class AuthService {
       );
 
       return newAccessToken;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async google(userData) {
+    try {
+      let user;
+      user = await User.findOne({ email: userData.email });
+      if (user) {
+        if (!user.status) {
+          throw new Error("Your account has been locked.");
+        }
+        const tokens = await generateToken(user);
+        return { user, tokens };
+      } else {
+        user = new User({
+          firstName: userData.given_name,
+          lastName: userData.family_name,
+          userName: userData.name,
+          email: userData.email,
+          avatar: userData.picture,
+        });
+        await user.save();
+        const tokens = await generateToken(user);
+        return { user, tokens };
+      }
     } catch (error) {
       throw error;
     }
