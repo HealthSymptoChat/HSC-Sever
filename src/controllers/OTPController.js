@@ -9,7 +9,7 @@ class OTPController {
             console.log(email);
             const user = User.findOne({ email });
             if (!user) {
-                return res.status(404).json({ error: "User not found" });
+                return res.status(404).json({ status: 404, error: "User not found" });
             }
             const otp = await OTPService.createOTP(req.body.email);
 
@@ -34,7 +34,7 @@ class OTPController {
             html: htmlContent,
           };
           sendEmail(option);
-          res.status(200).json({ message: 'OTP sent' });
+          res.status(200).json({ status: 200, message: 'success' });
         }
         catch (err) {
             res.status(500).json({ error: err.message });
@@ -45,14 +45,14 @@ class OTPController {
         const { email, otp } = req.body;
         const otpResult = await OTPService.findOtp(otp, email);
         if (!otpResult) {
-          return res.status(404).json({ error: 'OTP is incorrect' });
+          return res.status(404).json({ status: 404, message: 'OTP is incorrect' });
         }
         if (new Date(otpResult.expiredAt).getTime() < new Date().getTime()) {
-          return res.status(404).json({ error: 'OTP is expired' });
+          return res.status(404).json({ status: 404, message: 'OTP is expired' });
         }
-        res.status(200).json({ message: 'OTP is correct' });
+        res.status(200).json({ status: 200, message: 'success' });
       } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ status: 500, message: error.message });
         console.log(error);
       }
 }

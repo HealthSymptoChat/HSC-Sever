@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
 export async function sendEmail(options){
   // 1) Create a transporter
@@ -7,13 +8,13 @@ export async function sendEmail(options){
     port: '465',
     // secure: false,
     auth: {
-      user: 'Innovatexplorer24@gmail.com',
-      pass: 'Innovatexplorer2024',
+      user: process.env.EMAIL_USER || 'healthsymptochat.info@gmail.com',
+      pass: process.env.PASSWORD || 'nmmx jdzr jwtd inuv',
     },
 
   });
   const mailOptions = {
-    from: 'HealthSymptoChat <Innovatexplorer24@gmail.com>',
+    from: 'HealthSymptoChat <healthsymptochat.info@gmail.com>',
     to: options.email,
     subject: options.subject,
     text: options.message,
