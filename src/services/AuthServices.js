@@ -135,11 +135,11 @@ class AuthService {
         return { user, tokens };
       } else {
         user = new User({
-          firstName: userData.given_name,
-          lastName: userData.family_name,
-          userName: userData.name,
+          firstName: userData.givenName,
+          lastName: userData.familyName,
+          username: userData.name,
           email: userData.email,
-          avatar: userData.picture,
+          avatar: userData.photo,
         });
         await user.save();
         const tokens = await generateToken(user);

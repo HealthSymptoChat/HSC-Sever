@@ -8,7 +8,7 @@ class UserController {
           const user = await UserServices.getUserById(id);
           res.status(200).json({
             status: 200,
-            mesage: "success",
+            message: "success",
             data: user
         });
         } catch (error) {
@@ -24,7 +24,7 @@ class UserController {
           const user = await UserServices.updateUserById(id, userUpdate);
           res.status(200).json({
             status: 200,
-            mesage: "success",
+            message: "success",
             data: user
         });
         } catch (error) {
@@ -40,7 +40,7 @@ class UserController {
           const userList = await UserServices.getListUserByName(username);
           res.status(200).json({
             status: 200,
-            mesage: "success",
+            message: "success",
             data: userList
         });
         } catch (error) {
@@ -55,7 +55,7 @@ class UserController {
           const userList = await UserServices.getListUserByEmail(email);
           res.status(200).json({
             status: 200,
-            mesage: "success",
+            message: "success",
             data: userList
         });
         } catch (error) {
@@ -68,7 +68,7 @@ class UserController {
           const userList = await UserServices.getListUser();
           res.status(200).json({
             status: 200,
-            mesage: "success",
+            message: "success",
             data: userList
         });
         } catch (error) {

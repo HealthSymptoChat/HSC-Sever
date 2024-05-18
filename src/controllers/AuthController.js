@@ -7,7 +7,7 @@ class AuthController {
             const loginInfo = await AuthService.login(loginData);
             res.status(200).json({
                 status: 200,
-                mesage: "success",
+                message: "success",
                 data: loginInfo
             });
           } catch (error) {
@@ -22,7 +22,7 @@ class AuthController {
         const signupInfo = await AuthService.signup(signupData);
         res.status(200).json({
           status: 200,
-          mesage: "success",
+          message: "success",
           data: signupInfo
       });
       }
@@ -41,7 +41,7 @@ class AuthController {
         const message = await AuthService.logout(refreshToken);
         res.status(200).json({
           status: 200,
-          mesage: "success",
+          message: "success",
           data: message
       });
       } catch (error) {
@@ -59,7 +59,7 @@ class AuthController {
         const newAccessToken = await AuthService.refreshAccessToken(refreshToken);
         res.status(200).json({
           status: 200,
-          mesage: "success",
+          message: "success",
           data: newAccessToken
       });
       } catch (error) {
@@ -73,7 +73,7 @@ class AuthController {
         const googleAccess = await AuthService.google(req.body);
         res.status(200).json({
           status: 200,
-          mesage: "success",
+          message: "success",
           data: googleAccess
       });
       } catch (error) {
