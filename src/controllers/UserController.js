@@ -1,3 +1,4 @@
+import { User } from "../models/User.js";
 import UserServices from "../services/UserServices.js";
 
 class UserController {
@@ -13,6 +14,25 @@ class UserController {
         });
         } catch (error) {
           res.status(500).json({ error: error.message });
+          next();
+        }
+      }
+
+      async getUserByToken(req, res, next) {
+        try {
+          const user = await UserServices.getUserById(req.user.userId);
+          console.log(user);
+          if (!user) {
+            res.status(404).json({ status: 404, message: "User not found" });
+          } else {
+            res.status(200).json({
+              status: 200,
+              message: "success",
+              data: user
+            });
+          }
+        } catch (error) {
+          res.status(500).json({ status: 500, message: error.message });
           next();
         }
       }

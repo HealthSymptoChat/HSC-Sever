@@ -13,6 +13,8 @@ router.get("/getListUserByEmail/:email", AuthMiddleware, userController.getListU
 
 router.get("/getUserById/:id", AuthMiddleware,userController.getUserById);
 
+router.get("/me", AuthMiddleware,userController.getUserByToken);
+
 // POST METHODS
 router.post("/updateUser/:id", AuthMiddleware, userController.updateUser);
 

@@ -17,15 +17,15 @@ class OTPController {
     'https://firebasestorage.googleapis.com/v0/b/kohineko-7d678.appspot.com/o/web-static%2FKohi%20Neko%20(3).png?alt=media&token=da0fd3b4-12d2-459b-acc4-7960bf41f59b';
             const htmlContent = `
             <div style="font-family: Arial, sans-serif; padding: 20px; text-align: center;">
-              <h1 style="color: #6B240C; font-size: 24px;">Welcome to HealthSymptoChat!</h1>
+              <h1 style="color: #2D9596; font-size: 24px;">Chào mừng đến với HealthSymptoChat!</h1>
               <div style="background-color: #f0f0f0; padding: 10px; display: inline-block; border-radius: 10px;">
           <img src="${imgUrl}" alt="hsc image" style="width: 200px; border-radius: 10px;" />
         </div>
-              <p style="font-size: 18px; color: #333;">Thank you for signing up. We're excited to have you join our app!</p>
-              <h2 style="color: #6B240C; font-size: 20px;">Your OTP:</h2>
-              <div style="display: inline-block; border: 2px solid #6B240C; padding: 10px; background-color: #f97316; color: white; border-radius: 10px; font-size: 20px; font-weight: bold;">${otp.otp}</div>
-              <p style="font-size: 18px; color: #333;">Please use this OTP to complete your sign up process.</p>
-              <p style="font-size: 16px; color: #666;">If you didn't request this, you can safely ignore this email.</p>
+              <p style="font-size: 18px; color: #333;">Cảm ơn bạn đã đăng ký. Chúng tôi rất vui mừng khi bạn tham gia ứng dụng của chúng tôi!</p>
+              <h2 style="color: #2D9596; font-size: 20px;">Mã OTP của bạn:</h2>
+              <div style="display: inline-block; border: 2px solid #6B240C; padding: 10px; background-color: #2D9596; color: white; border-radius: 10px; font-size: 20px; font-weight: bold;">${otp.otp}</div>
+              <p style="font-size: 18px; color: #333;">Vui lòng sử dụng OTP này để hoàn tất quá trình đăng ký của bạn.</p>
+              <p style="font-size: 16px; color: #666;">Nếu bạn không yêu cầu mã này, bạn có thể yên tâm bỏ qua email này.</p>
             </div>
           `;
           const option = {
