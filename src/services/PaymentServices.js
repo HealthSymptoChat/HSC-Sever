@@ -8,7 +8,7 @@ import {
   import PayOS from "@payos/node";
   const payos = new PayOS(PAYOS_CLIENT_ID,PAYOS_API_KEY,PAYOS_CHECKSUM_KEY)
   class PaymentServices {
-    async createPaymentUrlRegisterCreator(){
+    async createPaymentUrlRegisterCreator(redirectUri){
         try {
             
             const amount = 15000;
@@ -17,7 +17,7 @@ import {
                 amount: amount,
                 orderCode: Math.floor(Math.random() * 1000) + 1,
                 description: "VQRIO123",
-                cancelUrl: `https://www.messenger.com/e2ee/yt/6531991546907385`,
+                cancelUrl: redirectUri,
                 returnUrl: `http://localhost:5000/api/v1/payment/SavePaymentInfo`,
                 expiredAt: Date.now,
                 signature: 'xxxx',

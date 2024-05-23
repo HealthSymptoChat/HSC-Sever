@@ -3,10 +3,10 @@ import PaymentServices from '../services/PaymentServices.js';
 class PaymentController {
     async createPayOS (req,res) {
         try {
-            const PayOS = await PaymentServices.createPaymentUrlRegisterCreator();
+            const PayOS = await PaymentServices.createPaymentUrlRegisterCreator(req.body.redirectUri);
             return res.status(200).json({
                 status: 200,
-                mesage: "success",
+                message: "success",
                 data: PayOS
             });
         }
@@ -23,7 +23,7 @@ class PaymentController {
 
             return res.status(200).json({
                 status: 200,
-                mesage: "success",
+                message: "success",
                 data: PaymentInfo
             });
         } catch (error) {

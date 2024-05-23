@@ -33,7 +33,8 @@ class AuthService {
       }
 
       await newUser.save();
-      return newUser;
+      const tokens = await generateToken(newUser);
+      return { user: newUser, tokens };
     } catch (error) {
       throw error;
     }
