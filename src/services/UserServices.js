@@ -1,4 +1,5 @@
 import { User } from "../models/User.js"
+import PackageService from "../services/PackageServices.js"
 
 class UserServices {
     async getUserById(userId) {
@@ -62,6 +63,51 @@ class UserServices {
         }
       }
     
+
+      async updatePackageUser(user_id, package_id) {
+        try {
+            const user = await User.findOne({ _id: user_id });
+    
+            if (!user) {
+                throw new Error("User not found");
+            }
+            
+            const packageData = await PackageService.getPackageId(package_id);
+
+            const dayToAdd = packageData.duration;
+  
+            user.package_id = package_id;
+    
+            const now = new Date();
+            const futureDate = new Date(now.getTime() + dayToAdd * 24 * 60 * 60 * 1000);
+            user.expirePackages = futureDate;
+
+            await user.save();
+            return user;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+      async updatePackageIdUserById(userId) {
+        try {
+            const user = await User.findOne({ _id: userId });
+            
+            if (!user) {
+                throw new Error("User not found");
+            }
+    
+            user.package_id = null;
+  
+            await user.save();
+    
+            return user;
+        } catch (error) {
+            throw error;
+        }
+    }
+    
+
 }
 
 export default new UserServices();

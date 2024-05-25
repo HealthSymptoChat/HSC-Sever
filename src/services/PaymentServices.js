@@ -6,7 +6,7 @@ import {
     PAYOS_RETURN_URL_FAIL
   } from "../config/payOS/PayOS.js";
   import PayOS from "@payos/node";
-  const payos = new PayOS(PAYOS_CLIENT_ID,PAYOS_API_KEY,PAYOS_CHECKSUM_KEY)
+  const payos = new PayOS(PAYOS_CLIENT_ID,PAYOS_API_KEY,PAYOS_CHECKSUM_KEY, PAYOS_RETURN_URL)
   class PaymentServices {
     async createPaymentUrlRegisterCreator(redirectUri){
         try {
@@ -18,7 +18,6 @@ import {
                 orderCode: Math.floor(Math.random() * 1000) + 1,
                 description: "VQRIO123",
                 cancelUrl: redirectUri,
-                returnUrl: `http://localhost:5000/api/v1/payment/SavePaymentInfo`,
                 expiredAt: Date.now,
                 signature: 'xxxx',
                 items: [],
