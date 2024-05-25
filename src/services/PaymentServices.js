@@ -8,15 +8,16 @@ import {
   import PayOS from "@payos/node";
   const payos = new PayOS(PAYOS_CLIENT_ID,PAYOS_API_KEY,PAYOS_CHECKSUM_KEY, PAYOS_RETURN_URL)
   class PaymentServices {
-    async createPaymentUrlRegisterCreator(redirectUri){
+    async createPaymentUrlRegisterCreator(redirectUri, user_id, package_id, amount){
         try {
             
-            const amount = 15000;
-            
+           
             const result = await payos.createPaymentLink({
                 amount: amount,
                 orderCode: Math.floor(Math.random() * 1000) + 1,
                 description: "VQRIO123",
+                user_id: user_id,
+                package_id: package_id,
                 cancelUrl: redirectUri,
                 expiredAt: Date.now,
                 signature: 'xxxx',

@@ -4,7 +4,8 @@ import UserServices from '../services/UserServices.js';
 class PaymentController {
     async createPayOS (req,res) {
         try {
-            const PayOS = await PaymentServices.createPaymentUrlRegisterCreator(req.body.redirectUri);
+            const { package_id, amount } = req.body;
+            const PayOS = await PaymentServices.createPaymentUrlRegisterCreator(req.body.redirectUri, req.user.userId, package_id, amount);
             return res.status(200).json({
                 status: 200,
                 message: "success",

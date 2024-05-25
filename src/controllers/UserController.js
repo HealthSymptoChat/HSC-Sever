@@ -98,8 +98,7 @@ class UserController {
 
       async updatePackageUser(req, res, next) {
         try {
-          const { id } = req.params;
-          const user = await UserServices.updatePackageIdUserById(id);
+          const user = await UserServices.updatePackageIdUserById(req.user.userId);
           res.status(200).json({
             status: 200,
             message: "success",

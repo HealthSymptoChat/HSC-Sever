@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
-        user_id: {
-            type: String,
-            default: "",
-        },
+        user: { 
+            type: mongoose.Schema.Types.ObjectId,
+             ref: 'User', required: true 
+            },
         package_id: {
             type: String,
             default: "",

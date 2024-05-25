@@ -17,6 +17,7 @@ router.get("/me", AuthMiddleware,userController.getUserByToken);
 
 // POST METHODS
 router.post("/updateUser/:id", AuthMiddleware, userController.updateUser);
-router.post("/updatePackageUser/:id", AuthMiddleware, userController.updatePackageUser);
+
+router.post("/resetPackageId", AuthMiddleware, userController.updatePackageUser);
 
 export default router;

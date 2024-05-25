@@ -76,7 +76,7 @@ class UserServices {
 
             const dayToAdd = packageData.duration;
   
-            user.package_id = package_id;
+            user.package = package_id;
     
             const now = new Date();
             const futureDate = new Date(now.getTime() + dayToAdd * 24 * 60 * 60 * 1000);
