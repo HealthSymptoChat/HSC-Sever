@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
-        user_id: {
-            type: String,
-            default: "",
-        },
-        package_id: {
+        packageName: {
             type: String,
             default: "",
         },
@@ -13,24 +9,20 @@ const schema = new mongoose.Schema(
             type: String,
             default: "",
         },
-        paymentDate: {
-            type: Date,
+        price: {
+            type: Number,
             default: "",
         },
-        amount: {
+        duration: {
             type: Number,
             default: "",
         },
         status: {
             type: Boolean,
             default: "",
-        },
-        package_id: {
-            type: String,
-            default: "",
         }
 
     }
 );
 
-export const Payment = mongoose.model('Payment', schema);
+export const Package = mongoose.model('Package', schema);

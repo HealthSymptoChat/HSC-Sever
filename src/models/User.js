@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
-         role_id: {
+         role: {
             type: Number,
             default: "",
           },
@@ -57,7 +57,14 @@ const schema = new mongoose.Schema(
             type: Number,
             default: "",
           },
-
+          package_id: {
+            type: String,
+            default: "",
+          },
+          expirePackages: {
+            type: Date,
+            default: "",
+          }
 
     }
 );

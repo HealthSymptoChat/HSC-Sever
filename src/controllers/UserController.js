@@ -95,6 +95,23 @@ class UserController {
           res.status(500).json({ error: error.message });
         }
       }
+
+      async updatePackageUser(req, res, next) {
+        try {
+          const { id } = req.params;
+          const user = await UserServices.updatePackageIdUserById(id);
+          res.status(200).json({
+            status: 200,
+            message: "success",
+            data: user
+        });
+        } catch (error) {
+          res.status(500).json({ error: error.message });
+          next();
+        }
+      }
+
+
 }
 
 export default new UserController();
