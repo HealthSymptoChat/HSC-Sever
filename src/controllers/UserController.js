@@ -21,7 +21,6 @@ class UserController {
       async getUserByToken(req, res, next) {
         try {
           const user = await UserServices.getUserById(req.user.userId);
-          console.log(user);
           if (!user) {
             res.status(404).json({ status: 404, message: "User not found" });
           } else {
@@ -32,7 +31,7 @@ class UserController {
             });
           }
         } catch (error) {
-          res.status(500).json({ status: 500, message: error.message });
+          res.status(500).json({ status: 500, message: error.message, data: null });
           next();
         }
       }
