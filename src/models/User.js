@@ -59,7 +59,7 @@ const schema = new mongoose.Schema(
           },
           package: { 
             type: mongoose.Schema.Types.ObjectId,
-             ref: 'Package', required: true },
+             ref: 'Package'},
           expirePackages: {
             type: Date,
             default: "",

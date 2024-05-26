@@ -97,7 +97,7 @@ class AuthService {
         throw new Error("Refresh token is missing.");
       }
 
-      const decodedRefreshToken = jwt.verify(
+      const decodedRefreshToken = jwt.decode(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET_KEY
       );
