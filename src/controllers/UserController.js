@@ -41,7 +41,7 @@ class UserController {
         try {
           const { id } = req.params;
           const userUpdate = req.body;
-          const user = await UserServices.updateUserById(id, userUpdate);
+          const user = await UserServices.updateUserById(req.user.userId, userUpdate);
           res.status(200).json({
             status: 200,
             message: "success",
