@@ -3,7 +3,7 @@ import { Package } from "../models/Package.js";
 class PackageServices {
     async getPackageId(package_id) {
         try {
-            const packageData = await Package.findOne({ package_id });
+            const packageData = await Package.findOne({ _id: package_id });
             if (!packageData) {
                 throw new Error("Invalid package_id");
             }
@@ -16,16 +16,11 @@ class PackageServices {
 
     async updatePackageById(packageId, packageUpdate) {
         try {
-          const pkg = await Package.findOne({ _id: packageId });
+          const pkg = await Package.findOneAndUpdate({ _id: packageId }, { $set: packageUpdate },{ new: true });
          
-          if (!user) {
+          if (!pkg) {
             throw new Error("Package not found");
           }
-          
-          pkg.packageName = packageUpdate.packageName;
-          pkg.description = packageUpdate.description;
-          pkg.price = packageUpdate.price;
-          pkg.duration = packageUpdate.duration;
         
           await pkg.save();
           return pkg;

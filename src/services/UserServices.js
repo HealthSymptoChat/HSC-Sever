@@ -16,14 +16,11 @@ class UserServices {
 
       async updateUserById(userId, userUpdate) {
         try {
-          const user = await User.findOne({ _id: userId });
+          const user = await User.findOneAndUpdate({ _id: userId }, { $set: userUpdate }, { new: true });
          
           if (!user) {
             throw new Error("User not found");
           }
-          user.firstName = userUpdate.firstName;
-          user.lastName = userUpdate.lastName;
-          user.userName = userUpdate.userName;
         
           await user.save();
           return user;
@@ -66,7 +63,7 @@ class UserServices {
 
       async updatePackageUser(user_id, package_id) {
         try {
-            const user = await User.findOne({ _id: user_id });
+            const user = await User.findOneAndUpdate({ _id: user_id });
     
             if (!user) {
                 throw new Error("User not found");

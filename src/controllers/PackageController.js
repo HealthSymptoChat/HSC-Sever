@@ -5,7 +5,7 @@ class PackageController {
         try {
           const { id } = req.params;
           const packageUpdate = req.body;
-          const pkg = await UserServices.updateUserById(id, packageUpdate);
+          const pkg = await PackageServices.updatePackageById(id, packageUpdate);
           res.status(200).json({
             status: 200,
             message: "success",
