@@ -45,10 +45,6 @@ const schema = new mongoose.Schema(
             type: String,
             default: "active",
           },
-          gender: {
-            type: String,
-            default: "",
-          },
           height: {
             type: Number,
             default: "",
