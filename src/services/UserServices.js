@@ -1,5 +1,7 @@
 import { User } from "../models/User.js"
 import PackageService from "../services/PackageServices.js"
+import RoleService from "../services/RoleService.js"
+import bcrypt from "bcrypt"
 
 class UserServices {
     async getUserById(userId) {
@@ -103,6 +105,36 @@ class UserServices {
             throw error;
         }
     }
+
+    async createUser(user) {
+        try {
+          const roleName = user.role;
+          const Role = await RoleService.getRoleByName(roleName);
+
+          const hashedPassword = await bcrypt.hash(user.password, 10);
+
+          const newUser = new User({
+            role: Role._id,
+            email: user.email,
+            username: user.username,
+            password: hashedPassword,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            refreshToken: user.refreshToken,
+            avatar: user.avatar,
+            status: user.status,
+            height: user.height,
+            weight: user.weight,
+            package: user.package,
+            expirePackages: user.expirePackages,
+          });
+          
+          await newUser.save();
+          return newUser;
+        } catch (error) {
+          throw error;
+        }
+      }
     
 
 }
