@@ -20,4 +20,6 @@ router.post("/updateUser/:id", AuthMiddleware, userController.updateUser);
 
 router.post("/resetPackageId", AuthMiddleware, userController.updatePackageUser);
 
+router.post("/createUser", userController.createUser);
+
 export default router;
