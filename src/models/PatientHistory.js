@@ -9,6 +9,10 @@ const schema = new mongoose.Schema(
             type: String,
             default: "",
         },
+        job: {
+            type: String,
+            default: "",
+        },
         gender: {
             type: String,
             default: "",

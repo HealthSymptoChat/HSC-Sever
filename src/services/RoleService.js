@@ -11,6 +11,11 @@ class RoleService {
         return await Role.findOne
         ({ name: roleName });
     }
+    async updateRole(roleId, role) {
+        return await Role.findByIdAndUpdate(roleId, role, {
+            new: true
+        });
+    }
 };
 
 export default new RoleService();

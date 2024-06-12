@@ -6,9 +6,9 @@ class PatientServices{
         try {
 
           const patientList = await PatientHistory.findOne({user: userId});
-          if (!patientList) {
-            throw new Error("Patient not found");
-          }
+          // if (!patientList) {
+          //   throw new Error("Patient not found");
+          // }
           return patientList;
 
         } catch (error) {

@@ -5,11 +5,16 @@ class PatientController {
         try {
             
           const patientList = await PatientServices.getPatientByUserId(req.user.userId);
+          if (!patientList) {
+            res.status(200).json({ status: 404, message: "Patient not found", data: {}});
+            return;
+          } else {
           res.status(200).json({
             status: 200,
             message: "success",
             data: patientList
         });
+        }
         } catch (error) {
           res.status(500).json({ error: error.message });
         }
