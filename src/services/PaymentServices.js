@@ -6,6 +6,7 @@ import {
     PAYOS_RETURN_URL_FAIL
   } from "../config/payOS/PayOS.js";
   import PayOS from "@payos/node";
+  import { Payment } from "../models/Payment.js";
   const payos = new PayOS(PAYOS_CLIENT_ID,PAYOS_API_KEY,PAYOS_CHECKSUM_KEY, PAYOS_RETURN_URL)
   class PaymentServices {
     async createPaymentUrlRegisterCreator(redirectUri, user_id, package_id, amount){
