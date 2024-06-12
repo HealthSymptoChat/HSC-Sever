@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
-         role: {
-            type: Number,
-            default: "",
+          role: {
+            type: mongoose.Schema.Types.ObjectId, ref: 'Role',
+            required: true,
           },
           email: {
             type: String,
@@ -25,15 +25,7 @@ const schema = new mongoose.Schema(
             type: String,
             default: "",
           },
-          phone: {
-            type: Number,
-            default: "",
-          },
           refreshToken: {
-            type: String,
-            default: "",
-          },
-          address: {
             type: String,
             default: "",
           },
@@ -43,11 +35,8 @@ const schema = new mongoose.Schema(
           },
           status: {
             type: String,
+            enum: ["active", "inactive", "deleted"],
             default: "active",
-          },
-          gender: {
-            type: String,
-            default: "",
           },
           height: {
             type: Number,

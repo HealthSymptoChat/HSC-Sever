@@ -18,10 +18,14 @@ const schema = new mongoose.Schema(
             default: "",
         },
         status: {
-            type: Boolean,
-            default: "",
+            enum: ["active", "inactive"],
+            type: String,
+            default: "active",
+        },
+        features: {
+            type: Array,
+            default: [],
         }
-
     }
 );
 

@@ -109,6 +109,20 @@ class UserController {
         }
       }
 
+      async createUser(req, res, next) {
+        try {
+          const user = req.body;
+          const newUser = await UserServices.createUser(user);
+          res.status(200).json({
+            status: 200,
+            message: "success",
+            data: newUser
+        });
+        } catch (error) {
+          res.status(500).json({ error: error.message });
+          next();
+        }
+      }
 
 }
 
