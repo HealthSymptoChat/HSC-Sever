@@ -16,9 +16,12 @@ dotenv.config();
 await db.connect();
 
 route(app);
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`Link: https://localhost:${PORT}`);
   // Fix server 13
 });
+
+export default app;

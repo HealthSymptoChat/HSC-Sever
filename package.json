@@ -5,7 +5,8 @@
   "main": "src/sever.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --inspect src/sever.js"
+    "start": "nodemon --inspect src/sever.js",
+    "vercel-build": "echo hello"
   },
   "author": "duy",
   "license": "ISC",
