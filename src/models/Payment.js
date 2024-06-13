@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
     {
-        user: { 
+        userId: { 
             type: mongoose.Schema.Types.ObjectId,
-             ref: 'User', required: true 
+             ref: 'User',
             },
         package_id: {
             type: String,
@@ -23,12 +23,9 @@ const schema = new mongoose.Schema(
         },
         status: {
             type: Boolean,
-            default: "",
+            default: true
         },
-        package_id: {
-            type: String,
-            default: "",
-        }
+      
 
     }
 );

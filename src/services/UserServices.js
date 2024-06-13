@@ -65,20 +65,24 @@ class UserServices {
 
       async updatePackageUser(user_id, package_id) {
         try {
-            const user = await User.findOneAndUpdate({ _id: user_id });
+            const user = await User.findByIdAndUpdate( user_id, { package: package_id }, {new: true} );
     
             if (!user) {
                 throw new Error("User not found");
             }
             
             const packageData = await PackageService.getPackageId(package_id);
+            
+            const currentDateTime = new Date();
+            const vietnamTime = new Date(currentDateTime.toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }));
+    
+            const utcTime = new Date(vietnamTime.getTime() - (vietnamTime.getTimezoneOffset() * 60000));
 
             const dayToAdd = packageData.duration;
   
             user.package = package_id;
     
-            const now = new Date();
-            const futureDate = new Date(now.getTime() + dayToAdd * 24 * 60 * 60 * 1000);
+            const futureDate = new Date(utcTime.getTime() + dayToAdd * 24 * 60 * 60 * 1000);
             user.expirePackages = futureDate;
 
             await user.save();
