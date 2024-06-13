@@ -19,14 +19,15 @@ class PaymentController {
 
     async savePaymentInfo(req, res) {
         try {
+            const orderCode = req.params.orderCode;
             const { package_id, description, amount, redirectUri } = req.body;
-            const PaymentInfo = await PaymentServices.savePaymentInfo(req.user.userId, package_id, description, amount, redirectUri);
-
-            
+            //const PaymentInfo = await PaymentServices.savePaymentInfo(req.user.userId, package_id, description, amount, redirectUri, orderCode);
+            const getPayment = await PaymentServices.getPaymentInfo(orderCode);
+            console.log(getPayment);
             return res.status(200).json({
                 status: 200,
                 message: "success",
-                data: PaymentInfo,
+                data: getPayment,
                 redirectUri: PaymentInfo.redirect
             });
         } catch (error) {
