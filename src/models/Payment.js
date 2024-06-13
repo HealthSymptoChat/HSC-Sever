@@ -25,7 +25,10 @@ const schema = new mongoose.Schema(
             type: Boolean,
             default: true
         },
-      
+        orderCode: {
+            type: Number,
+            default: "",
+        }
 
     }
 );

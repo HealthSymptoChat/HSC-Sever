@@ -17,17 +17,18 @@ import {
         try {
             
             const packageDes = await PackageServices.getPackageId(package_id);
-            const returnUrlWithUserId = `${PAYOS_RETURN_URL}?userId=${user_id}&packageId=${package_id}&amount=${amount}&redirectUri=${redirectUri}`;
+            const orderCode = Math.floor(Math.random() * 100000) + 1;
+            const returnUrlWithUserId = `${PAYOS_RETURN_URL}?userId=${user_id}&packageId=${package_id}&amount=${amount}&redirectUri=${redirectUri}&orderCode=${orderCode}`;
             console.log(returnUrlWithUserId);
             amount = Number(amount);
             const result = await payos.createPaymentLink({
                 amount: amount,
-                orderCode: Math.floor(Math.random() * 1000) + 1,
+                orderCode: orderCode,
                 description: packageDes.description,
                 user_id: user_id,
                 package_id: package_id,
                 returnUrl: returnUrlWithUserId,
-                cancelUrl: "https://www.messenger.com/t/100007341311979",
+                cancelUrl: redirectUri,
                 expiredAt: Date.now,
                 signature: 'xxxx',
                 items: [],
@@ -39,34 +40,39 @@ import {
         }
     }
 
-    async savePaymentInfo(user_id, package_id, amount, redirectUri) {
+    async savePaymentInfo(user_id, package_id, amount, orderCode) {
         try {
+            const existingPayment = await Payment.findOne({ orderCode: orderCode });
+            if (existingPayment) {
+                return { error: "orderCode already exists." };
+            }
+    
             const packageDes = await PackageServices.getPackageId(package_id);
             const currentDateTime = new Date();
             const vietnamTime = new Date(currentDateTime.toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }));
-    
             const utcTime = new Date(vietnamTime.getTime() - (vietnamTime.getTimezoneOffset() * 60000));
     
-            const payment = await Payment.create({
+            const payment = new Payment({
                 userId: user_id,
                 package_id: package_id,
                 description: packageDes.description,
                 paymentDate: utcTime,
                 amount: amount,
-                status: true
+                status: true,
+                orderCode: orderCode // Thêm orderCode vào thông tin thanh toán
             });
-
-            UserServices.updatePackageUser(user_id, package_id);
     
-            return {
-                payment,
-                redirectUri
-            };
+            await payment.save();
+            await UserServices.updatePackageUser(user_id, package_id);
+    
+            return payment;
+    
         } catch (error) {
             console.error(error);
             throw error;
         }
     }
+    
     
     
   }

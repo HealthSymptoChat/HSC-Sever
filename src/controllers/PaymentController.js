@@ -19,19 +19,22 @@ class PaymentController {
 
     async savePaymentInfo(req, res) {
         try {
-            const { packageId, amount, userId, redirectUri } = req.query;
-            const PaymentInfo = await PaymentServices.savePaymentInfo(userId, packageId, amount, redirectUri);
-            return res.status(200).json({
-                status: 200,
-                message: "success",
-                data: PaymentInfo,
-               
-            });
+            const { packageId, amount, userId, redirectUri, orderCode } = req.query;
+    
+            const newOrderCode = parseInt(orderCode);
+            if (isNaN(newOrderCode)) {
+                return res.status(400).json({ error: "Invalid orderCode" });
+            }
+    
+            const PaymentInfo = await PaymentServices.savePaymentInfo(userId, packageId, amount, newOrderCode);
+    
+            return res.redirect(`${redirectUri}?status=PAID`);
         } catch (error) {
             console.error(error);
             return res.status(500).json({ error: error.message });
         }
     }
+    
 }
 
 export default new PaymentController();
