@@ -4,8 +4,8 @@ import PaymentServices from '../services/PaymentServices.js';
 class PaymentController {
     async createPayOS (req,res) {
         try {
-            const { package_id, amount } = req.body;
-            const PayOS = await PaymentServices.createPaymentUrlRegisterCreator(req.user.userId, package_id, amount);
+            const { package_id, amount, redirectUri } = req.body;
+            const PayOS = await PaymentServices.createPaymentUrlRegisterCreator(req.user.userId, package_id, amount, redirectUri);
             return res.status(200).json({
                 status: 200,
                 message: "success",
@@ -19,16 +19,13 @@ class PaymentController {
 
     async savePaymentInfo(req, res) {
         try {
-            const orderCode = req.params.orderCode;
-            const { package_id, description, amount, redirectUri } = req.body;
-            //const PaymentInfo = await PaymentServices.savePaymentInfo(req.user.userId, package_id, description, amount, redirectUri, orderCode);
-            const getPayment = await PaymentServices.getPaymentInfo(orderCode);
-            console.log(getPayment);
+            const { packageId, amount, userId, redirectUri } = req.query;
+            const PaymentInfo = await PaymentServices.savePaymentInfo(userId, packageId, amount, redirectUri);
             return res.status(200).json({
                 status: 200,
                 message: "success",
-                data: getPayment,
-                redirectUri: PaymentInfo.redirect
+                data: PaymentInfo,
+               
             });
         } catch (error) {
             console.error(error);

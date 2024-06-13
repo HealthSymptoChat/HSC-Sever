@@ -8,19 +8,25 @@ import {
   import PayOS from "@payos/node";
   import { Payment } from "../models/Payment.js";
   import UserServices from '../services/UserServices.js';
+  import PackageServices from "./PackageServices.js";
+  import axios from 'axios';
+
   const payos = new PayOS(PAYOS_CLIENT_ID,PAYOS_API_KEY,PAYOS_CHECKSUM_KEY, PAYOS_RETURN_URL)
   class PaymentServices {
-    async createPaymentUrlRegisterCreator(user_id, package_id, amount){
+    async createPaymentUrlRegisterCreator(user_id, package_id, amount, redirectUri) {
         try {
             
+            const packageDes = await PackageServices.getPackageId(package_id);
+            const returnUrlWithUserId = `${PAYOS_RETURN_URL}?userId=${user_id}&packageId=${package_id}&amount=${amount}&redirectUri=${redirectUri}`;
+            console.log(returnUrlWithUserId);
             amount = Number(amount);
             const result = await payos.createPaymentLink({
                 amount: amount,
                 orderCode: Math.floor(Math.random() * 1000) + 1,
-                description: "VQRIO123",
+                description: packageDes.description,
                 user_id: user_id,
                 package_id: package_id,
-                returnUrl: PAYOS_RETURN_URL,
+                returnUrl: returnUrlWithUserId,
                 cancelUrl: "https://www.messenger.com/t/100007341311979",
                 expiredAt: Date.now,
                 signature: 'xxxx',
@@ -33,9 +39,9 @@ import {
         }
     }
 
-    async savePaymentInfo(user_id, package_id, description, amount, redirectUri) {
+    async savePaymentInfo(user_id, package_id, amount, redirectUri) {
         try {
-            
+            const packageDes = await PackageServices.getPackageId(package_id);
             const currentDateTime = new Date();
             const vietnamTime = new Date(currentDateTime.toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }));
     
@@ -44,7 +50,7 @@ import {
             const payment = await Payment.create({
                 userId: user_id,
                 package_id: package_id,
-                description: description,
+                description: packageDes.description,
                 paymentDate: utcTime,
                 amount: amount,
                 status: true
@@ -56,22 +62,6 @@ import {
                 payment,
                 redirectUri
             };
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    }
-
-    async getPaymentInfo(orderCode) {
-        try {
-            const response = await axios.get(`https://api.payos.com/v2/payment-requests/${orderCode}`, {
-                headers: {
-                    'x-client-id': PAYOS_CLIENT_ID,
-                    'x-api-key': PAYOS_API_KEY
-                }
-            });
-            return response.data, response.user_id;
-
         } catch (error) {
             console.error(error);
             throw error;
