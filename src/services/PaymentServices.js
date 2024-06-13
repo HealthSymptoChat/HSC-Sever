@@ -61,6 +61,22 @@ import {
             throw error;
         }
     }
+
+    async getPaymentInfo(orderCode) {
+        try {
+            const response = await axios.get(`https://api.payos.com/v2/payment-requests/${orderCode}`, {
+                headers: {
+                    'x-client-id': PAYOS_CLIENT_ID,
+                    'x-api-key': PAYOS_API_KEY
+                }
+            });
+            return response.data, response.user_id;
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
     
     
   }
