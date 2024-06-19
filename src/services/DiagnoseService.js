@@ -3,7 +3,7 @@ import {Diagnose} from '../models/Diagnose.js';
 class DiagnoseService {
     async getDiagnosesByUserId(userId) {
         try {
-            const diagnoseList = await Diagnose.find({ user: userId });
+            const diagnoseList = await Diagnose.find({ user: userId }).populate('user');
             if(!diagnoseList)
                 throw new Error("Diagnose not found");
             else if(diagnoseList.length === 0) {

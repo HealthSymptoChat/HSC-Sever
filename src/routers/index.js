@@ -6,6 +6,7 @@ import PatientRouter from './patient.js';
 import PackageRouter from './package.js';
 import RoleRouter from './role.js';
 import DiagnoseRouter from './diagnose.js';
+import DashboardRouter from './dashboard.js';
 
 const route = (app) => {
     app.use("/api/v1/auth", AuthRouter);
@@ -17,6 +18,7 @@ const route = (app) => {
     app.use("/api/v1/patient", PatientRouter);
     app.use("/api/v1/package", PackageRouter);
     app.use("/api/v1/diagnose", DiagnoseRouter);
+    app.use("/api/v1/dashboard", DashboardRouter);
 };
 
 export default route;

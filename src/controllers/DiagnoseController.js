@@ -21,8 +21,9 @@ class DiagnoseController {
 
     async createDiagnose(req, res) {
         try {
-            const { patient_id, diagnose } = req.body;
-            const newDiagnose = await DiagnoseService.create(patient_id, diagnose);
+            const diagnose = req.body;
+            const { userId } = req.user;
+            const newDiagnose = await DiagnoseService.create(diagnose, userId);
             return res.status(200).json({
                 status: 200,
                 message: "success",
