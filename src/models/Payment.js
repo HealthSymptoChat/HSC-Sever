@@ -6,8 +6,8 @@ const schema = new mongoose.Schema(
              ref: 'User',
             },
         package_id: {
-            type: String,
-            default: "",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Package',
         },
         description: {
             type: String,

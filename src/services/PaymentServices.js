@@ -73,7 +73,15 @@ import {
         }
     }
     
-    
+    async getListPayment() {
+        try {
+            const payments = await Payment.find().populate('userId').populate('package_id');
+            const filteredPayments = payments.sort((a, b) => b.paymentDate - a.paymentDate);
+            return filteredPayments;
+        } catch (error) {
+            throw error;
+        }
+    }
     
   }
 
