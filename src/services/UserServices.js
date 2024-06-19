@@ -100,7 +100,8 @@ class UserServices {
                 throw new Error("User not found");
             }
     
-            user.package_id = null;
+            // user.package = null;
+            user.expirePackages = null;
   
             await user.save();
     
