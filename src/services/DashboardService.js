@@ -7,10 +7,16 @@ class DashboardService {
                 const user = await UserServices.getListUser();
                 const payment =  await PaymentServices.getListPayment();
                 let revenue = 0;
+                let registeredUser = 0;
                 for (let i = 0; i < payment.length; i++) {
                         revenue += payment[i].amount;
                 }
-                return { totalUser: user.length, payment, revenue };
+                for (let i = 0; i < user.length; i++) {
+                    if (user[i].package && user[i].expirePackages > new Date()) {
+                        registeredUser += 1;
+                    }
+                }
+                return { totalUser: user.length, payment, revenue, registeredUser };
         } catch (error) {
             throw error;
         }
