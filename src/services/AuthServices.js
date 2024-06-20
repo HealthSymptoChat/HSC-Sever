@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
+import { Role } from "../models/Role.js";
 import { generateToken } from "../utils/generateToken.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
@@ -8,6 +9,8 @@ class AuthService {
   async signup(userData) {
     try {
       let newUser = new User(userData);
+      const role = await Role.findOne({ name: "user" });
+      newUser.role = role._id;
 
       if (!userData.email || !userData.password) {
         throw new Error(
@@ -135,7 +138,9 @@ class AuthService {
         const tokens = await generateToken(user);
         return { user, tokens };
       } else {
+        const role = await Role.findOne({ name: "user" });
         user = new User({
+          role: role._id,
           firstName: userData.givenName,
           lastName: userData.familyName,
           username: userData.name,

@@ -14,7 +14,7 @@ class OTPController {
             const otp = await OTPService.createOTP(req.body.email);
 
             const imgUrl =
-    'https://firebasestorage.googleapis.com/v0/b/kohineko-7d678.appspot.com/o/web-static%2FKohi%20Neko%20(3).png?alt=media&token=da0fd3b4-12d2-459b-acc4-7960bf41f59b';
+    'https://scontent.fsgn5-15.fna.fbcdn.net/v/t39.30808-6/444752614_122109571742327503_933609388314219540_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=X-t0Wzi7GQcQ7kNvgFJnwOh&_nc_ht=scontent.fsgn5-15.fna&oh=00_AYAp366iUNCRlz6qtAanvRubqM0HdEBZ3RNnXTYXfEgXAQ&oe=6679FA73';
             const htmlContent = `
             <div style="font-family: Arial, sans-serif; padding: 20px; text-align: center;">
               <h1 style="color: #2D9596; font-size: 24px;">Chào mừng đến với HealthSymptoChat!</h1>

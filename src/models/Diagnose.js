@@ -15,13 +15,9 @@ const schema = new mongoose.Schema(
             type: String,
             default: "",
         },
-        symptoms: {
+        treatment: {
             type: Array,
             default: [],
-        },
-        treatment: {
-            type: String,
-            default: "",
         },
         otherDiseases: {
             type: Array,
