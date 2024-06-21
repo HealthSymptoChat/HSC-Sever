@@ -45,10 +45,10 @@ class OTPController {
         const { email, otp } = req.body;
         const otpResult = await OTPService.findOtp(otp, email);
         if (!otpResult) {
-          return res.status(404).json({ status: 404, message: 'OTP is incorrect' });
+          return res.status(200).json({ status: 404, message: 'OTP is incorrect' });
         }
         if (new Date(otpResult.expiredAt).getTime() < new Date().getTime()) {
-          return res.status(404).json({ status: 404, message: 'OTP is expired' });
+          return res.status(200).json({ status: 404, message: 'OTP is expired' });
         }
         res.status(200).json({ status: 200, message: 'success' });
       } catch (error) {
