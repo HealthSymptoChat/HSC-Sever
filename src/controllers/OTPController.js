@@ -1,4 +1,4 @@
-import { User } from "../models/User.js";
+import UserService from "../services/UserServices.js";
 import OTPService from "../services/OTPService.js";
 import {sendEmail} from "../utils/email.js";
 
@@ -6,10 +6,9 @@ class OTPController {
     async sendOtp (req,res, next) {
         try {
             const { email } = req.body;
-            console.log(email);
-            const user = User.findOne({ email });
-            if (!user) {
-                return res.status(404).json({ status: 404, error: "User not found" });
+            const user = await UserService.getListUserByEmail(email);
+            if (user.length > 0) {
+                return res.status(200).json({ status: 404, message: "Email is already in use" });
             }
             const otp = await OTPService.createOTP(req.body.email);
 
