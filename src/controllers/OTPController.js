@@ -13,7 +13,7 @@ class OTPController {
             const otp = await OTPService.createOTP(req.body.email);
 
             const imgUrl =
-    'https://scontent.fsgn5-15.fna.fbcdn.net/v/t39.30808-6/444752614_122109571742327503_933609388314219540_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=X-t0Wzi7GQcQ7kNvgFJnwOh&_nc_ht=scontent.fsgn5-15.fna&oh=00_AYAp366iUNCRlz6qtAanvRubqM0HdEBZ3RNnXTYXfEgXAQ&oe=6679FA73';
+    'https://scontent.fsgn5-11.fna.fbcdn.net/v/t39.30808-6/444752614_122109571742327503_933609388314219540_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=FyzGGMB-4IQQ7kNvgEoLuKw&_nc_ht=scontent.fsgn5-11.fna&oh=00_AYD49j0ZCCqnvn2xDzYCCDaCV_7tSmRKGCOdjZTK02Uhgw&oe=668A04B3';
             const htmlContent = `
             <div style="font-family: Arial, sans-serif; padding: 20px; text-align: center;">
               <h1 style="color: #2D9596; font-size: 24px;">Chào mừng đến với HealthSymptoChat!</h1>
